@@ -1,15 +1,17 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
-const path = require('path');
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
+import { createRequire } from 'node:module';
 
 const config: StorybookConfig = {
 	stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
 	addons: [
-        '@storybook/addon-links',
-        '@storybook/addon-essentials',
-        '@storybook/addon-onboarding',
-        '@storybook/addon-interactions',
-        '@storybook/addon-styling-webpack',
-        {
+		'@storybook/addon-links',
+		'@storybook/addon-essentials',
+		'@storybook/addon-onboarding',
+		'@storybook/addon-interactions',
+		{
 			name: '@storybook/addon-styling-webpack',
 
 			options: {
@@ -60,8 +62,8 @@ const config: StorybookConfig = {
 				],
 			},
 		},
-        '@storybook/addon-webpack5-compiler-swc'
-    ],
+		'@storybook/addon-webpack5-compiler-swc',
+	],
 	webpackFinal: async (config) => {
 		if (config?.resolve?.alias) {
 			config.resolve.alias = {
